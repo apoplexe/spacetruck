@@ -21,5 +21,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^10.12.15",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "react-testing-library": "^5.3.2",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
+  }
 }
