@@ -1,14 +1,14 @@
 import React from 'react'
 
-type Props = {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     name: string
 }
 
 const TextInput = (props: Props) => {
-    const { name } = props
+    const { name, ...childs } = props
 
     return (
-        <input type="text" placeholder={name} />
+        <input type="text" placeholder={name} {...childs}/>
     )
 }
 
