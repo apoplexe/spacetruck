@@ -1,0 +1,41 @@
+.furnitureItem {
+    display: grid;
+    font-size: 1em;
+    grid-template-columns: 50px 1fr 50px;
+    margin-bottom: 20px;
+}
+
+.checkbox {
+    background-color: #dedede;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    font-size: 1.75em;
+}
+
+.furnitureInfos {
+    display: flex;
+    flex-direction: column;
+}
+
+.furnitureLabel {
+    font-size: 1em;
+}
+
+.furnitureVolume {
+    font-size: 0.75em;
+    color: grey;
+}
+
+.removeItem {
+   opacity: 0.6;
+   font-size: 1.75em;
+}
+
+.furnitureList {
+    display: flex;
+    flex-direction: column;
+}

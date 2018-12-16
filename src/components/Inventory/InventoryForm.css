@@ -1,4 +1,23 @@
 .root {
     display: flex;
+}
+
+.inputSection {
+    display: flex;
     flex-direction: column;
+}
+
+.buttonAddFurniture {
+    padding: 5%;
+    background-color: #2089f5;
+    color: white;
+    font-size: 1em;
+}
+
+.furnitureVolume {
+    background-color: #dedede;
+    padding: 0.5% 1%;
+    border-radius: 4%;
+    height: fit-content;
+    margin-left: 2%;
 }

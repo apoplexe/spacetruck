@@ -3,10 +3,8 @@ import TextInput from "../TextInput";
 import volumeCalculator from "../../utils/volumeCalculator";
 import { ListProps } from './InventoryList';
 import { Furniture } from "./Inventory";
-import * as styles from './InventoryForm.css'
-import classnames from 'classnames'
+import styles from './InventoryForm.css'
 
-console.log(styles)
 const msg = Object.freeze({
   furnitureLabel: "Nom du meuble",
   lengthLabel: "Longueur (cm)",
@@ -59,14 +57,16 @@ const InventoryForm = React.memo((props: Props) => {
 
   return (
     <>
-      <form className={classnames(styles.root)} onSubmit={handleSubmit}>
-        <TextInput onChange={handleLabelValueChange} name={msg.furnitureLabel} required/>
-        <TextInput onChange={handleLengthValueChange} name={msg.lengthLabel} required/>
-        <TextInput onChange={handleWidthValueChange} name={msg.widthLabel} required/>
-        <TextInput onChange={handleHeightValueChange} name={msg.heightLabel} required/>
-        <input type='submit' value={msg.addFurniture} />
+      <form className={styles.root} onSubmit={handleSubmit}>
+        <div className={styles.inputSection}>
+          <TextInput onChange={handleLabelValueChange} name={msg.furnitureLabel} required/>
+          <TextInput onChange={handleLengthValueChange} name={msg.lengthLabel} required/>
+          <TextInput onChange={handleWidthValueChange} name={msg.widthLabel} required/>
+          <TextInput onChange={handleHeightValueChange} name={msg.heightLabel} required/>
+          <input className={styles.buttonAddFurniture} type='submit' value={msg.addFurniture} />
+        </div>
+        <span className={styles.furnitureVolume} >{`Volume : ${furnitureVolume} m3`}</span>
       </form>
-      <span className={classnames(styles.furnitureVolume)} >{furnitureVolume}</span>
     </>
   );
 });
