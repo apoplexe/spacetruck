@@ -1,7 +1,12 @@
-import React, { EventHandler, useEffect } from "react";
+import React, { useEffect } from "react";
 import TextInput from "../TextInput";
 import volumeCalculator from "../../utils/volumeCalculator";
+import { ListProps } from './InventoryList';
+import { Furniture } from "./Inventory";
+import * as styles from './InventoryForm.css'
+import classnames from 'classnames'
 
+console.log(styles)
 const msg = Object.freeze({
   furnitureLabel: "Nom du meuble",
   lengthLabel: "Longueur (cm)",
@@ -10,25 +15,19 @@ const msg = Object.freeze({
   addFurniture: "Ajouter"
 });
 
-type Furniture = {
-  furnitureVolume: number;
-  furnitureHeight: number;
-  furnitureWidth: number;
-  furnitureLength: number;
-  furnitureLabel: string;
-};
+interface Props extends React.FormHTMLAttributes<HTMLFormElement>, ListProps<Furniture>  {
+  addFurniture: (furnitures: ReadonlyArray<Furniture>) => void
+}
 
-interface Props extends React.FormHTMLAttributes<HTMLFormElement> {}
-
-const InventoryForm = () => {
+const InventoryForm = React.memo((props: Props) => {
+  const { addFurniture, items } = props
   const [furnitureLabel, setFurnitureLabel] = React.useState('');
   const [furnitureVolume, setFurnitureVolume] = React.useState(0);
   const [furnitureWidth, setFurnitureWidth] = React.useState(0);
   const [furnitureHeight, setFurnitureHeight] = React.useState(0);
   const [furnitureLength, setFurnitureLength] = React.useState(0);
-  const [furnitureList, setFurnitureList] = React.useState<ReadonlyArray<Furniture>>([]);
 
-  useEffect(() => console.log(furnitureList), [furnitureList])
+  useEffect(() => console.log(items), [items])
   useEffect(
     () => {
       setFurnitureVolume(
@@ -41,13 +40,13 @@ const InventoryForm = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    setFurnitureList([{
+    addFurniture([{
       furnitureVolume: furnitureVolume,
       furnitureHeight: furnitureHeight,
       furnitureWidth: furnitureWidth,
       furnitureLength: furnitureLength,
       furnitureLabel: furnitureLabel
-    }, ...furnitureList])
+    }, ...items])
   };
 
   const handleLabelValueChange = (event: React.FormEvent<HTMLInputElement>) => setFurnitureLabel(event.currentTarget.value);
@@ -60,16 +59,16 @@ const InventoryForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className={classnames(styles.root)} onSubmit={handleSubmit}>
         <TextInput onChange={handleLabelValueChange} name={msg.furnitureLabel} required/>
         <TextInput onChange={handleLengthValueChange} name={msg.lengthLabel} required/>
         <TextInput onChange={handleWidthValueChange} name={msg.widthLabel} required/>
         <TextInput onChange={handleHeightValueChange} name={msg.heightLabel} required/>
         <input type='submit' value={msg.addFurniture} />
       </form>
-      <span>{furnitureVolume}</span>
+      <span className={classnames(styles.furnitureVolume)} >{furnitureVolume}</span>
     </>
   );
-};
+});
 
 export default InventoryForm;
