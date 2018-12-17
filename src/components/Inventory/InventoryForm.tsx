@@ -25,7 +25,6 @@ const InventoryForm = React.memo((props: Props) => {
   const [furnitureHeight, setFurnitureHeight] = React.useState(0);
   const [furnitureLength, setFurnitureLength] = React.useState(0);
 
-  useEffect(() => console.log(items), [items])
   useEffect(
     () => {
       setFurnitureVolume(
@@ -38,13 +37,13 @@ const InventoryForm = React.memo((props: Props) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    addFurniture([{
+    addFurniture([...items, {
       furnitureVolume: furnitureVolume,
       furnitureHeight: furnitureHeight,
       furnitureWidth: furnitureWidth,
       furnitureLength: furnitureLength,
       furnitureLabel: furnitureLabel
-    }, ...items])
+    }])
   };
 
   const handleLabelValueChange = (event: React.FormEvent<HTMLInputElement>) => setFurnitureLabel(event.currentTarget.value);

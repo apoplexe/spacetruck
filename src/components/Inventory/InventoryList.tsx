@@ -2,24 +2,37 @@ import React, { ReactNode, useEffect } from "react";
 import { Furniture } from "./Inventory";
 import { MdCheck, MdDelete } from "react-icons/md";
 import styles from "./InventoryList.css";
+import Button from "../Button";
 
 export interface ListProps<Furniture> {
   items: ReadonlyArray<Furniture>;
 }
 
-export interface Props extends ListProps<Furniture> {}
+export interface Props extends ListProps<Furniture> {
+  removeFurniture: (furnitures: ReadonlyArray<Furniture>) => void;
+}
 
 const InventoryList = React.memo((props: Props) => {
-  const { items } = props;
-  const [itemsSelected, setItemsSelected] = React.useState<ReadonlyArray<number>>([]);
-
-  // useEffect(() => console.log(itemsSelected), [itemsSelected])
+  const { removeFurniture, items } = props;
+  const [itemsSelected, setItemsSelected] = React.useState<
+    ReadonlyArray<number>
+  >([]);
 
   const handleItemClick = (index: number) => {
-      itemsSelected.includes(index)
-          ? setItemsSelected(itemsSelected.filter(activeId => activeId !== index))
-          : setItemsSelected([...itemsSelected, index]);
-      };
+    itemsSelected.includes(index)
+      ? setItemsSelected(itemsSelected.filter(activeId => activeId !== index))
+      : setItemsSelected([...itemsSelected, index]);
+  };
+
+  const handleRemoveFurniture = (index: number) => {
+    removeFurniture(items.filter((item, idx) => idx !== index));
+    setItemsSelected([])
+  };
+  
+  const handleRemoveAll = () => {
+    removeFurniture(items.filter((item, idx) => !itemsSelected.includes(idx)));
+    setItemsSelected([])
+  };
 
   const renderListOfFurniture = React.useMemo(
     () =>
@@ -41,14 +54,24 @@ const InventoryList = React.memo((props: Props) => {
                 {`${item.furnitureVolume} m3`}
               </span>
             </div>
-            <div className={styles.removeItem}><MdDelete /></div>
+            <div
+              onClick={() => handleRemoveFurniture(index)}
+              className={styles.removeItem}
+            >
+              <MdDelete />
+            </div>
           </li>
         );
       }),
-    [items]
+    [items, itemsSelected]
   );
 
-  return <ul className={styles.furnitureList}>{renderListOfFurniture}</ul>;
+  return (
+    <>
+      <ul className={styles.furnitureList}>{renderListOfFurniture}</ul>
+      <Button onClick={handleRemoveAll} >Tout Supprimer</Button>
+    </>
+  );
 });
 
 export default InventoryList;
