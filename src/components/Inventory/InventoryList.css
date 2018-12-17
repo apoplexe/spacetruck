@@ -7,8 +7,8 @@
 
 .checkbox {
     background-color: #dedede;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,6 +19,8 @@
 .furnitureInfos {
     display: flex;
     flex-direction: column;
+    font-size: 1.25em;
+    text-transform: capitalize;
 }
 
 .furnitureLabel {

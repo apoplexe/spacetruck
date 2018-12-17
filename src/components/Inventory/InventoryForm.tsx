@@ -4,13 +4,14 @@ import volumeCalculator from "../../utils/volumeCalculator";
 import { ListProps } from './InventoryList';
 import { Furniture } from "./Inventory";
 import styles from './InventoryForm.css'
+import Button from '../Button'
 
 const msg = Object.freeze({
-  furnitureLabel: "Nom du meuble",
-  lengthLabel: "Longueur (cm)",
-  widthLabel: "Largeur (cm)",
-  heightLabel: "Hauteur (cm)",
-  addFurniture: "Ajouter"
+  furnitureLabel: "Furniture name",
+  lengthLabel: "length (cm)",
+  widthLabel: "Width (cm)",
+  heightLabel: "Height (cm)",
+  addFurniture: "Add Furniture"
 });
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement>, ListProps<Furniture>  {
@@ -62,7 +63,7 @@ const InventoryForm = React.memo((props: Props) => {
           <TextInput onChange={handleLengthValueChange} name={msg.lengthLabel} required/>
           <TextInput onChange={handleWidthValueChange} name={msg.widthLabel} required/>
           <TextInput onChange={handleHeightValueChange} name={msg.heightLabel} required/>
-          <input className={styles.buttonAddFurniture} type='submit' value={msg.addFurniture} />
+          <Button kind="secondary" type='submit' >{msg.addFurniture}</Button>
         </div>
         <span className={styles.furnitureVolume} >{`Volume : ${furnitureVolume} m3`}</span>
       </form>

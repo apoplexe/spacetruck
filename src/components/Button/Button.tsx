@@ -1,15 +1,30 @@
-import React from 'react';
+import React from "react";
+import styles from "./Button.css";
+import classnames from "classnames";
 
-export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+type ButtonKind = "primary" | "secondary";
+
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** 
+   * @default 'primary'
+  */
+  kind?: ButtonKind;
+}
 
 const Button = React.memo((props: Props) => {
-    const {
-      ...childs
-    } = props
-  
-    return (
-      <button {...childs} />
-    );
-})
+  const { kind = "primary", ...childs } = props;
+
+  return (
+    <button
+      className={classnames(
+        styles.button,
+        {
+          [styles.buttonSecondary]: kind === "secondary"
+        }
+      )}
+      {...childs}
+    />
+  );
+});
 
 export default Button;

@@ -69,7 +69,7 @@ const InventoryList = React.memo((props: Props) => {
   return (
     <>
       <ul className={styles.furnitureList}>{renderListOfFurniture}</ul>
-      <Button onClick={handleRemoveAll} >Tout Supprimer</Button>
+      <Button onClick={handleRemoveAll} >Delete all</Button>
     </>
   );
 });

@@ -1,0 +1,22 @@
+.button {
+    font-size: 1em;
+    padding: 1%;
+    color: #253163;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 5px;
+}
+
+.button:hover {
+    color: #00dca0;
+}
+
+.buttonSecondary {
+    background-color: #00dca0;
+    padding: 5%;
+}
+
+.buttonSecondary:hover {
+    color: white;
+}
